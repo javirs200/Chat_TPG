@@ -26,13 +26,13 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 io.on('connection', (socket) => {
 
     console.log('connected from client',socket.id);
-    socket.emit('foo',"hello client ")
+    socket.emit('messageEvent',"hello client ")
 
-    socket.on('create-something', (value) => {
+    socket.on('clientMessage', (value) => {
       console.log('echo from server ');
       console.log('client send data: ' ,value)
       let msg = "server catched data " + value +""
-      socket.emit('foo',msg)
+      socket.emit('messageEvent',msg)
     });
 
     socket.on('disconnect', () => {
