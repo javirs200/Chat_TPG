@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { ConectionContext } from '../../../context/connectionContext';
+import { ConectionContext } from '../../../../context/connectionContext';
 
 export function Events({ events }) {
   const { isConnected } = useContext(ConectionContext)
