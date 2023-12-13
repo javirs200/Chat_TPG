@@ -10,6 +10,7 @@ const http = require('http');
 const server = http.createServer(app);
 
 const { Server } = require("socket.io");
+const usersRouter = require('./routes/users');
 
 const io = new Server(server,{
     cors: {
@@ -24,19 +25,25 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, 'client/build')));
 
-//dev route
-app.get("*", (req, res) => { res.send("log 404 not found") });
+app.use('/users',usersRouter)
+
+//404
+app.get("*", (req, res) => { res.sendFile(path.join(__dirname + '/client/build/index.html')) });
+
+
+// io.emit send to all clients , socket.emit send to particular client
 
 io.on('connection', (socket) => {
 
     console.log('connected from client',socket.id);
-    socket.emit('foo',"hello client ")
+    let msg = "hello client " + socket.id
+    io.emit('messageEvent',msg)
 
-    socket.on('create-something', (value) => {
+    socket.on('clientMessage', (value) => {
       console.log('echo from server ');
       console.log('client send data: ' ,value)
       let msg = "server catched data " + value +""
-      socket.emit('foo',msg)
+      io.emit('messageEvent',msg)
     });
 
     socket.on('disconnect', () => {

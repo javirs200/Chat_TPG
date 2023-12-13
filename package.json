@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "nodemon index.js"
+    "buildRunServer": "cd client/ && npm run build && cd .. && nodemon index.js",
+    "buildClient": "cd client/ && npm run build",
+    "server": "nodemon index.js",
+    "install": "cd client && npm i && cd .. && npm i"
   },
   "keywords": [],
   "author": "",

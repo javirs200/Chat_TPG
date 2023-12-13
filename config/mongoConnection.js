@@ -5,7 +5,7 @@ const configParams = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     ssl: true,
-    sslValidate: false,
+    // sslValidate: false,
 }
 
 mongoose.connect(process.env.MONGO_URI, configParams);
