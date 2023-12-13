@@ -4,9 +4,9 @@ const { createToken } = require('../config/jsonWebToken');
 
 const signup = async (req, res) => {
     try {
-        const { email, password, role } = req.body;
+        const { email, password } = req.body;
         console.log("****", role);
-        const newUser = await usersModels.signup(email, password, role)
+        const newUser = await usersModels.signup(email, password)
         res.status(201).json({ msg: "Signed Up" });
     } catch (error) {
         res.status(400).json({ msg: error.message });
@@ -24,7 +24,6 @@ const login = async (req, res) => {
             res.status(200)
                 .set('Authorization', `Bearer ${token}`)
                 .cookie('access_token', token)
-                .json({ role: user[0].role })
                 .send()
         } else {
             res.status(400).json({ msg: "wrong credentials" });
