@@ -1,22 +1,17 @@
-import { useState } from 'react'
-import {ConectionContext} from './context/connectionContext'
+import React,{ useState } from 'react'
 import Main from './components/Main/Main'
-import { socket } from './config/socket'
+// import Header from './components/Header/header'
+import { BrowserRouter } from 'react-router-dom';
 
 function App() {
 
-  const [isConnected, setIsConnected] = useState(socket.connected);
-
-  const updateConnection = (connection) => {
-    setIsConnected(connection)
-  }
-
   return (
-    <ConectionContext.Provider value={{ isConnected, updateConnection }}>
-      <div>
+    <div className="App">
+      <BrowserRouter>
+        {/* <Header /> */}
         <Main />
-      </div>
-    </ConectionContext.Provider>
+      </BrowserRouter>
+    </div>
   )
 }
 

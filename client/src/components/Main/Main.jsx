@@ -1,48 +1,62 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { socket } from '../../config/socket';
-import { ConnectionState } from './ConnectionState/ConnectionState';
-import { ConnectionManager } from './ConnectionManager/ConnectionManager';
-import { Events } from "./Events/Events";
-import { MyForm } from './MyForm/MyForm';
+import React, { useState } from "react";
+import Chat from "./Chat/Chat";
+import Home from './Home/Home';
+import Login from "./Login/Login";
+import SingUP from "./SingUP/SingUP";
+import { socket } from "../../config/socket";
+import { Route, Routes } from "react-router-dom";
+import { ConectionContext } from "../../context/connectionContext";
 
-import { ConectionContext } from '../../context/connectionContext';
 
-export default function Main() {
+const Main = () => {
 
-  const { updateConnection } = useContext(ConectionContext)
+    //   const [logged, setLogged] = useState(false);
 
-  const [messageEvents, setMessageEvents] = useState([]);
+    const [isConnected, setIsConnected] = useState(socket.connected);
 
-  useEffect(() => {
-    function onConnect() {
-      updateConnection(true);
+    const updateConnection = (connection) => {
+        setIsConnected(connection)
     }
 
-    function onDisconnect() {
-      updateConnection(false);
-    }
+    return <main className="main">
+        <Routes>
+            <Route path="/"
+                element={
+                    <>
+                        <Home />
+                    </>
+                }
+            />
+            <Route path="/singUp"
+                element={
+                    <>
+                        <SingUP />
+                    </>
+                }
+            />
+            <Route path="/login"
+                element={
+                    <>
+                        <Login />
+                    </>
+                }
+            />
+            <Route path="/chat"
+                element={
+                    <ConectionContext.Provider value={{ isConnected, updateConnection }}>
+                        <div>
+                            <Chat />
+                        </div>
+                    </ConectionContext.Provider>
+                }
+            />
+            <Route path="/*"
+                element={
+                    <><h1>Not found front</h1></>
+                }
+            />
+        </Routes>
+    </main>;
+};
 
-    function onMessageEvent(value) {
-      setMessageEvents([...messageEvents, value]);
-    }
-
-    socket.on('connect', onConnect);
-    socket.on('disconnect', onDisconnect);
-    socket.on('messageEvent', onMessageEvent);
-
-    return () => {
-      socket.off('connect', onConnect);
-      socket.off('disconnect', onDisconnect);
-      socket.off('messageEvent', onMessageEvent);
-    };
-  });
-
-  return (
-    <div className="Main">
-      <ConnectionState />
-      <Events events={messageEvents} />
-      <ConnectionManager />
-      <MyForm />
-    </div>
-  );
-}
+export default Main;
