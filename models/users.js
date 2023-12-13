@@ -1,10 +1,10 @@
 const User = require('./usersSchema');
 
 
-const signup = async (email, password, role) => {
+const signup = async (name,email, password) => {
 
     try {
-        const newUser = await User.create({ email, password, role });
+        const newUser = await User.create({ name,email,password });
         return newUser;
 
     } catch (error) {
