@@ -35,15 +35,26 @@ app.get("*", (req, res) => { res.sendFile(path.join(__dirname + '/client/build/i
 
 io.on('connection', (socket) => {
 
+  console.log(socket)
+  // get email and name form cookie
+  // if email
+  // user = socket cokie name
+  // get user id from db for storage messages
+
     console.log('connected from client',socket.id);
-    let msg = "hello client " + socket.id
-    io.emit('messageEvent',msg)
+    // let msg = "hello client " + socket.id
+    // io.emit('messageEvent',msg)
 
     socket.on('clientMessage', (value) => {
+
       console.log('echo from server ');
+
       console.log('client send data: ' ,value)
-      let msg = "server catched data " + value +""
-      io.emit('messageEvent',msg)
+      //guardar mensaje en bdd
+
+      let eventObj = {user:'',message:value}
+
+      io.emit('messageEvent',eventObj)
     });
 
     socket.on('disconnect', () => {

@@ -13,9 +13,9 @@ const signup = async (name,email, password) => {
     };
 };
 
-const login = async (email, password) => {
+const login = async (email,password) => {
     try {
-        const userExists = await User.find({ email, password });
+        const userExists = await User.find({ email,password });
         console.log(userExists);
         return userExists;
 
@@ -25,22 +25,9 @@ const login = async (email, password) => {
     };
 };
 
-const getAllUsers = async () => {
-    try {
-        const users = await User.find({});
-        console.log("USERS", users);
-        return users
-
-    } catch (error) {
-        console.log(error.message);
-        throw error;
-    }
-};
-
 const userModels = {
     signup,
-    login,
-    getAllUsers
+    login
 };
 
 

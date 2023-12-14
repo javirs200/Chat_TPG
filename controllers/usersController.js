@@ -1,17 +1,23 @@
 const usersModels = require('../models/users');
 const { createToken } = require('../config/jsonWebToken');
 
+const responseToken = (res,name,email)=>{
+    const token = createToken({name,email});
+        res.status(201)
+        .cookie('access_token', token)
+        .json({ msg: "Signed Up" });
+}
 
 const signup = async (req, res) => {
     try {
         const { name,email, password } = req.body;
         console.log(name,email,password);
-        const token = createToken({email});
+
         const newUser = await usersModels.signup(name,email,password)
-        res.status(201)
-        .set('Authorization', `Bearer ${token}`)
-        .cookie('access_token', token)
-        .json({ msg: "Signed Up" });
+        log(newUser)
+
+        responseToken(res,name,email)
+
     } catch (error) {
         res.status(400).json({ msg: error.message });
     }
