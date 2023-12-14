@@ -6,8 +6,14 @@
   "scripts": {
     "buildRunServer": "cd client/ && npm run build && cd .. && nodemon index.js",
     "buildClient": "cd client/ && npm run build",
-    "server": "nodemon index.js",
-    "install": "cd client && npm i && cd .. && npm i"
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "clientinstall": "npm install --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "feed_db": "node seed/seeds.js",
+    "deploy": "concurrently \"npm run server\" \"npm run client\"",
+    "render-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "keywords": [],
   "author": "",
