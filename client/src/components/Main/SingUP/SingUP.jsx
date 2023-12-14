@@ -2,7 +2,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 
-import { Navigate, useNavigate } from "react-router-dom";
+
+import { useNavigate } from "react-router-dom";
 
 const SingUP = () => {
 
@@ -22,15 +23,16 @@ const SingUP = () => {
 
     //api hazme un user
     const res = await axios.post('/users/signup', user)
+
     try {
       //respuesta de api
       if (res) {
-        console.log('response headers', res.headers);
 
-        const authHeader = res.headers.authorization;
-        axios.defaults.headers.common['Authorization'] = authHeader;
+        if (res.status === 201 ) {
 
-        if (res.data) {
+          // usar estado logado
+
+          
           console.log('response data', res.data);
           navigateTo('/chat')
         }else{
