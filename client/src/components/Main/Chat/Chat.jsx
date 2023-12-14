@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { socket } from '../../../config/socket';
 import { ConnectionState } from './ConnectionState/ConnectionState';
 import { ConnectionManager } from './ConnectionManager/ConnectionManager';
-import { Events } from "./Events/Events";
+import { MessageBox } from "./MessageBox/MessageBox";
 import { MyForm } from './MyForm/MyForm';
 
 import { ConectionContext } from '../../../context/connectionContext';
@@ -11,7 +11,7 @@ export default function Chat() {
 
   const { updateConnection } = useContext(ConectionContext)
 
-  const [messageEvents, setMessageEvents] = useState([]);
+  const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     function onConnect() {
@@ -23,7 +23,10 @@ export default function Chat() {
     }
 
     function onMessageEvent(value) {
-      setMessageEvents([...messageEvents, value]);
+
+      console.log('llega por socket ',value);
+
+      setMessages([...messages, value]);
     }
 
     socket.on('connect', onConnect);
@@ -37,11 +40,19 @@ export default function Chat() {
     };
   });
 
+  useEffect(() => { socket.connect() }, [])
+
+
+
   return (
-    <div className="Main">
+    <div className="Chat">
       <ConnectionState />
-      <Events events={messageEvents} />
-      <ConnectionManager />
+
+      <MessageBox messages={messages} />
+      {/* aqui meter mensajes y pasar prop nombre user */}
+
+      {/* sustituir conection manager por auto connect y boton de dissconect */}
+      {/* <ConnectionManager /> */}
       <MyForm />
     </div>
   );
