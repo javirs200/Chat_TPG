@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { socket } from '../../../../config/socket';
+import { TextField,Button } from "@mui/material";
 
 export function MyForm() {
   const [value, setValue] = useState('');
@@ -11,14 +12,20 @@ export function MyForm() {
     socket.timeout(2000).emit('clientMessage', value, () => {
       setIsLoading(false);
     });
+
+    event.target['standard-basic'].value = ''
     setValue('')
   }
 
+  const handleChange = (e) => {
+    setValue(e.target.value)
+  }
+
+
   return (
     <form onSubmit={ onSubmit }>
-      <input onChange={ e => setValue(e.target.value) } />
-
-      <button type="submit" disabled={ isLoading }>Submit</button>
+      <TextField id="standard-basic" label="Mensaje" variant="standard" onChange={handleChange} />
+      <Button variant="contained" disabled={isLoading} type="submit">Enviar</Button>
     </form>
   );
 }
