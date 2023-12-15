@@ -1,6 +1,6 @@
 const User = require('./usersSchema');
 
-
+//create
 const signup = async (name,email, password) => {
 
     try {
@@ -13,6 +13,7 @@ const signup = async (name,email, password) => {
     };
 };
 
+//read
 const login = async (email,password) => {
     try {
         const userExists = await User.find({ email,password });
@@ -24,6 +25,10 @@ const login = async (email,password) => {
         throw error
     };
 };
+
+//update -not needed now
+
+//delete -not needed now
 
 const userModels = {
     signup,

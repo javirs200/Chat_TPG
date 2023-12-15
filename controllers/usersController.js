@@ -14,7 +14,7 @@ const signup = async (req, res) => {
         console.log(name,email,password);
 
         const newUser = await usersModels.signup(name,email,password)
-        log(newUser)
+        console.log(newUser)
 
         responseToken(res,name,email)
 
@@ -23,8 +23,28 @@ const signup = async (req, res) => {
     }
 };
 
+const login = async (req, res) => {
+    try {
+
+        //TODO
+        
+        const { name,email, password } = req.body;
+        console.log(name,email,password);
+
+        const logedUser = await usersModels.login(email,password)
+        console.log(logedUser)
+
+        responseToken(res,name,email)
+        
+
+    } catch (error) {
+        res.status(400).json({ msg: error.message });
+    }
+};
+
 const users = {
-    signup
+    signup,
+    login
 };
 
 module.exports = users;
