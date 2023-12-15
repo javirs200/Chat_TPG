@@ -1,0 +1,15 @@
+@import '../utils/variables.scss';
+@import '../utils/mixins.scss';
+
+.nav-bar{
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+}
+
+.nav-bar > li > a {
+    font: $font;
+    font-size: large;
+    color: $gold;
+    text-decoration: none;
+}
