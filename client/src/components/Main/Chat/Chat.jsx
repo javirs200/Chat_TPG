@@ -15,10 +15,12 @@ export default function Chat() {
 
   useEffect(() => {
     function onConnect() {
+      console.log('usuario conectado');
       updateConnection(true);
     }
 
     function onDisconnect() {
+      console.log('usuario desconectado');
       updateConnection(false);
     }
 
@@ -49,10 +51,8 @@ export default function Chat() {
       <ConnectionState />
 
       <MessageBox messages={messages} />
-      {/* aqui meter mensajes y pasar prop nombre user */}
-
-      {/* sustituir conection manager por auto connect y boton de dissconect */}
-      {/* <ConnectionManager /> */}
+      
+      {/* aniadir boton de dissconect */}
       <MyForm />
     </div>
   );
