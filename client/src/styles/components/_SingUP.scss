@@ -1,0 +1,9 @@
+@import '../utils/variables.scss';
+@import '../utils/mixins.scss';
+
+.fields{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+}

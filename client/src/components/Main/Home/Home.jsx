@@ -1,20 +1,21 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { Button } from "@mui/material";
+
 
 const Home = () => {
 
-  const navigate = useNavigate();
+  const navigateTo = useNavigate();
 
   const redirect = (route) => {
-    navigate(route);
+      navigateTo(route);
   }
 
   return (
     <div className="home">
       <h1>Home</h1>
-      <button onClick={()=>{redirect('/chat')}}>GoChat</button>
-      <button onClick={()=>{redirect('/login')}}>Login</button>
-      <button onClick={()=>{redirect('/singUp')}}>SingUP</button>
+      <Button variant="contained" onClick={()=>{redirect('/login')}} >Login</Button>
+      <Button variant="contained" onClick={()=>{redirect('/singUp')}} >SingUP</Button>
     </div>
   );
 };
