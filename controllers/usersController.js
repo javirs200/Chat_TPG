@@ -1,12 +1,5 @@
 const usersModels = require('../models/users');
-const { createToken } = require('../config/jsonWebToken');
-
-const responseToken = (res,name,email)=>{
-    const token = createToken({name,email});
-        res.status(201)
-        .cookie('access_token', token)
-        .json({ msg: "Signed Up" });
-}
+const { createToken,decodeToken } = require('../config/jsonWebToken');
 
 const signup = async (req, res) => {
     try {
@@ -16,7 +9,10 @@ const signup = async (req, res) => {
         const newUser = await usersModels.signup(name,email,password)
         console.log(newUser)
 
-        responseToken(res,name,email)
+        const token = createToken({name,email});
+        res.status(201)
+        .cookie('access_token', token)
+        .json({ msg: "Signed Up" });
 
     } catch (error) {
         res.status(400).json({ msg: error.message });
@@ -25,18 +21,23 @@ const signup = async (req, res) => {
 
 const login = async (req, res) => {
     try {
-
-        //TODO
-        
-        const { name,email, password } = req.body;
-        console.log(name,email,password);
+        console.log("peticion de login ");
+        const { email, password } = req.body;
+        console.log(email,password);
 
         const logedUser = await usersModels.login(email,password)
-        console.log(logedUser)
-
-        responseToken(res,name,email)
         
+        const name = logedUser[0].name
+        console.log("logedUser name ",name)
 
+        const token = createToken({name,email});
+    
+        console.log('decoded token',decodeToken(token));
+
+        res.status(200)
+        .cookie('access_token', token)
+        .json({ msg: "logged in" });
+        
     } catch (error) {
         res.status(400).json({ msg: error.message });
     }

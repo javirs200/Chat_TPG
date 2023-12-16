@@ -1,12 +1,15 @@
-import React from "react";
+import React,{useContext} from "react";
 import { useForm } from "react-hook-form";
 import axios from 'axios';
-import { TextField,Button } from "@mui/material";
+import { Button } from "@mui/material";
 
+import {UserContext} from '../../../context/userContext'
 
 import { useNavigate } from "react-router-dom";
 
 const SingUP = () => {
+
+  const{ setLogged }= useContext(UserContext)
 
   const navigateTo = useNavigate();
 
@@ -32,17 +35,19 @@ const SingUP = () => {
         if (res.status === 201) {
 
           // usar context logged
+          setLogged(true)
           console.log('response data', res.data);
 
           navigateTo('/chat')
         } else {
-
           //use state error
           // mostrar componente no se pudo registrar ?
+          alert('no se pudo registrar')
         }
       }
     } catch (error) {
       console.log({ msg: error.message });
+      alert('no se pudo registrar')
     }
   }
 
