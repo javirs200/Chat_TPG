@@ -3,15 +3,11 @@ import { socket } from '../../../config/socket';
 import { ConnectionState } from './ConnectionState/ConnectionState';
 import { MessageBox } from "./MessageBox/MessageBox";
 import { MyForm } from './MyForm/MyForm';
-
 import { ConectionContext } from '../../../context/connectionContext';
-import { UserContext } from '../../../context/userContext';
 
 export default function Chat() {
 
   const { updateConnection } = useContext(ConectionContext)
-
-  const { logged } = useContext(UserContext)
 
   const [messages, setMessages] = useState([]);
   const [userName,setUserName] = useState('')
@@ -26,13 +22,12 @@ export default function Chat() {
     function onDisconnect() {
       console.log('usuario desconectado');
       updateConnection(false);
+      setUserName('')
     }
 
     function onSetUserNameEvent(value){
-      if(logged){
-        console.log(value);
-        setUserName(value)
-      }
+      console.log("evento set username ",value);
+      setUserName(value)
     }
 
     function onMessageEvent(value) {
@@ -63,7 +58,6 @@ export default function Chat() {
     <div className="Chat">
       <ConnectionState />
       <MessageBox messages={messages} userName={userName} />
-      {/* aniadir boton de dissconect */}
       <MyForm />
     </div>
   );

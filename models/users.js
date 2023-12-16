@@ -17,7 +17,7 @@ const signup = async (name,email, password) => {
 const login = async (email,password) => {
     try {
         const userExists = await User.find({ email,password });
-        console.log(userExists);
+        // console.log(userExists);
         return userExists;
 
     } catch (error) {

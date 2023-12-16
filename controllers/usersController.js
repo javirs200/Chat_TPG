@@ -23,7 +23,7 @@ const login = async (req, res) => {
     try {
         console.log("peticion de login ");
         const { email, password } = req.body;
-        console.log(email,password);
+        // console.log(email,password);
 
         const logedUser = await usersModels.login(email,password)
         
@@ -32,8 +32,8 @@ const login = async (req, res) => {
 
         const token = createToken({name,email});
     
-        console.log('decoded token',decodeToken(token));
-
+        //console.log('decoded token',decodeToken(token));
+        console.log('envio token en cookie');
         res.status(200)
         .cookie('access_token', token)
         .json({ msg: "logged in" });
@@ -43,9 +43,25 @@ const login = async (req, res) => {
     }
 };
 
+const logOut = async (req, res) => {
+
+    try {
+        res.status(200)
+            .cookie('access_token', "")
+            .send();
+    } catch (error) {
+        res.status(400).json({ msg: error.message });
+
+    }
+
+}
+
+
+
 const users = {
     signup,
-    login
+    login,
+    logOut
 };
 
 module.exports = users;

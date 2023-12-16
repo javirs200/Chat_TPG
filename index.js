@@ -42,12 +42,23 @@ if (process.env.NODE_ENV === 'production') {
 
 io.on('connection', (socket) => {
 
-  const strToken = socket.handshake.headers.cookie
-  const acces_tokent = strToken.split('access_token=')[1]
-  const decodedToken = decodeToken(acces_tokent)
-  const name = decodedToken.name
+  let name = 'anonimo'
 
-  socket.emit('setUserNameEvent',name)
+  try{
+    const strToken = socket.handshake.headers.cookie
+    if(strToken){
+      console.log('cookie exitente');
+      const acces_tokent = strToken.split('access_token=')[1]
+      const decodedToken = decodeToken(acces_tokent)
+      name = decodedToken.name
+      socket.emit('setUserNameEvent',name)
+    }
+  }catch(error){
+    console.log(error);
+  }
+
+  console.log("nueva conexion usuario ",name);
+  
 
   // get user id from db for storage messages
 
@@ -59,7 +70,7 @@ io.on('connection', (socket) => {
 
     //guardar mensaje en bdd
 
-    let eventObj = { name: '', message: value }
+    let eventObj = { name:name, message: value }
 
     io.emit('messageEvent', eventObj)
   });

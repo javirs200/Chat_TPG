@@ -1,10 +1,19 @@
 import React, { useState } from 'react';
 import { socket } from '../../../../config/socket';
 import { TextField,Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 export function MyForm() {
+
   const [value, setValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  const navigateTo = useNavigate();
+
+  const redirect = (route) => {
+      navigateTo(route);
+  }
 
   function onSubmit(event) {
     event.preventDefault();
@@ -21,11 +30,25 @@ export function MyForm() {
     setValue(e.target.value)
   }
 
+  const handleLogout = async()=>{
+    try {
+      const res = await axios.get('/users/logout')
+      console.log('logout res',res);
+      socket.disconnect()
+      redirect('/')
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
+    <div className='chatControlls'>
     <form onSubmit={ onSubmit }>
       <TextField id="standard-basic" label="Mensaje" variant="standard" onChange={handleChange} />
       <Button variant="contained" disabled={isLoading} type="submit">Enviar</Button>
     </form>
+    <br />
+    <Button variant="outlined" onClick={()=>handleLogout()}>Logout</Button>
+    </div>
   );
 }
