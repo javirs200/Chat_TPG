@@ -1,16 +1,10 @@
 import React from "react";
-import { Link } from 'react-router-dom'
-
+import BallMenu from "./BallMenu";
 
 const Nav = () => {
   return (
     <nav>
-        <ul className="nav-bar">
-            <li><Link className={'link'} to='/'>Home</Link></li>
-            <li><Link className={'link'} to='/chat'>Chat</Link></li>
-            <li><Link className={'link'} to='/login'>Login</Link></li>
-            <li><Link className={'link'} to='/singUp'>singUp</Link></li>
-        </ul >
+        <BallMenu/>
     </nav >
 )
 };
