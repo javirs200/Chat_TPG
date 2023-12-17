@@ -1,10 +1,13 @@
 # MERN Chat APP
 
-Flustack messaging aplication using Mongo Express React Node.js 
+Flustack multi user messaging aplication using Mongo Express React Node.js 
 Also this app use
+-Cookies
+-JWT
+-Mongoose
+-Material UI
 -SASS
 -WebSockets
--Jdoc
 
 ### RUNNING THE APP 
 
@@ -14,8 +17,6 @@ npm install
 cd  client 
 
 npm install 
-
-npm run build
 
 cd ..
 
@@ -29,8 +30,8 @@ MY_TOKEN_SECRET=<some secret string>
 ```
 
 ```bash or zsh
-npm run server
+npm run dev
 
 ```
 
-now you can open webrowser on localhost port 3000
+this app uses react scripts so it should automaticali open webrowser if not open it and navigate to http://localhost:3000
