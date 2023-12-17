@@ -9,6 +9,7 @@ Also this app uses:
 - Material UI
 - SASS
 - WebSockets
+- Docker
 
 ### RUNNING THE APP 
 
@@ -38,3 +39,9 @@ npm run dev
 ```
 
 this app uses react scripts so it should automaticaly open webrowser, if not, open it and navigate to http://localhost:3000
+
+### DEPLOY THE APP
+
+this app add a dockerfile , it can be deploy on plattforms shuch as render , aws , Azure ...
+
+there is an exapmle of render deployment -> [Chat TPG](https://chat-tpg.onrender.com)
