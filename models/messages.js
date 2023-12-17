@@ -47,8 +47,37 @@ const getAll = async () => {
 };
 
 //update -not needed now
+const updateMessage = async (userEmail,text,newText) => {
+    try {
+
+        const user = await User.findOne({email:userEmail});
+
+        if(user){
+            const messageExists = await Message.replaceOne({ content:text,id_user:user.id },{ content:newText,id_user:user.id });
+            return messageExists;
+        }
+
+    } catch (error) {
+        console.log(error.message);
+        throw error
+    };
+};
 
 //delete -not needed now
+const deleteMessage = async (userEmail,text) => {
+    try {
+        const user = await User.findOne({email:userEmail});
+
+        if(user){
+            const messageExists = await Message.deleteOne({ content:text,id_user:user.id });
+            return messageExists;
+        }
+
+    } catch (error) {
+        console.log(error.message);
+        throw error
+    };
+};
 
 const messageModels = {
     save,
