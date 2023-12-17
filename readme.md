@@ -12,7 +12,8 @@ Also this app uses:
 
 ### RUNNING THE APP 
 
-```bash or zsh
+get npm dependencies
+```
 npm install
 
 cd  client 
@@ -30,9 +31,10 @@ MONGO_URI=<mongo database uri>
 MY_TOKEN_SECRET=<some secret string>
 ```
 
-```bash or zsh
+run development enviroment
+```
 npm run dev
 
 ```
 
-this app uses react scripts so it should automaticali open webrowser if not open it and navigate to http://localhost:3000
+this app uses react scripts so it should automaticaly open webrowser if not open it and navigate to http://localhost:3000
