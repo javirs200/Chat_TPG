@@ -1,0 +1,9 @@
+@import '../utils/variables.scss';
+@import '../utils/mixins.scss';
+
+.link{
+    font: $font;
+    font-size: large;
+    color: $gold;
+    text-decoration: none;
+}

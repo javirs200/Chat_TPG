@@ -1,0 +1,10 @@
+@import '../utils/variables.scss';
+@import '../utils/mixins.scss';
+
+.home{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}

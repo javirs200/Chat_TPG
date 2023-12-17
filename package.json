@@ -1,0 +1,28 @@
+{
+  "name": "chat_tpg",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "devServer": "nodemon server.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "deploy": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.2.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "js-cookie": "^3.0.5",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.0.2",
+    "nodemon": "^3.0.2",
+    "socket.io": "^4.7.2"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.3"
+  }
+}
