@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { socket } from '../../../config/socket';
-import { ConnectionState } from './ConnectionState/ConnectionState';
-import { MessageBox } from "./MessageBox/MessageBox";
-import { MyForm } from './MyForm/MyForm';
+import ConnectionState from './ConnectionState/ConnectionState';
+import MessageBox from "./MessageBox/MessageBox";
+import MyForm from './MyForm/MyForm';
 import { ConectionContext } from '../../../context/connectionContext';
 import { MessagesContext } from '../../../context/messagesContext';
 import { UserContext } from '../../../context/userContext';
 
-export default function Chat() {
+const Chat = ()=> {
 
   const { updateConnection } = useContext(ConectionContext)
 
@@ -84,3 +84,5 @@ export default function Chat() {
     </div>
   );
 }
+
+export default Chat

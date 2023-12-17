@@ -1,7 +1,7 @@
 import React from 'react';
 import Message from './Message/Message';
 
-export function MessageBox({ messages, userName }) {
+const MessageBox = ({ messages, userName }) => {
 
   // const { isConnected } = useContext(ConectionContext)
 
@@ -30,3 +30,5 @@ export function MessageBox({ messages, userName }) {
 
   );
 }
+
+export default MessageBox

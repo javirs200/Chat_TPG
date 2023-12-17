@@ -7,7 +7,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import PersonOffIcon from '@mui/icons-material/PersonOff';
 
 
-export function ConnectionState() {
+const ConnectionState = () => {
 
   const { isConnected } = useContext(ConectionContext)
 
@@ -18,3 +18,5 @@ export function ConnectionState() {
     {logged ? <PersonIcon fontSize="large" /> : <PersonOffIcon fontSize="large" />}
   </>);
 }
+
+export default ConnectionState
