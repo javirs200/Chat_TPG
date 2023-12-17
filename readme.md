@@ -1,13 +1,14 @@
 # MERN Chat APP
 
 Flustack multi user messaging aplication using Mongo Express React Node.js 
-Also this app use
--Cookies
--JWT
--Mongoose
--Material UI
--SASS
--WebSockets
+
+Also this app uses:
+- Cookies
+- JWT
+- Mongoose
+- Material UI
+- SASS
+- WebSockets
 
 ### RUNNING THE APP 
 
