@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { UserContext } from '../../../../context/userContext';
 
-export function MyForm() {
+const Myform = ()=> {
 
   const [value, setValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -67,3 +67,5 @@ export function MyForm() {
     </div>
   );
 }
+
+export default Myform
