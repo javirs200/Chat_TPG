@@ -37,4 +37,4 @@ npm run dev
 
 ```
 
-this app uses react scripts so it should automaticaly open webrowser if not open it and navigate to http://localhost:3000
+this app uses react scripts so it should automaticaly open webrowser, if not, open it and navigate to http://localhost:3000
