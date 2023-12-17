@@ -42,6 +42,6 @@ this app uses react scripts so it should automaticaly open webrowser, if not, op
 
 ### DEPLOY THE APP
 
-this app add a dockerfile , it can be deploy on plattforms shuch as render , aws , Azure ...
+this app has a dockerfile , it can be deploy on plattforms shuch as render , aws , Azure ...
 
 there is an exapmle of render deployment -> [Chat TPG](https://chat-tpg.onrender.com)
