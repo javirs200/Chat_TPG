@@ -13,44 +13,44 @@ import ChatIcon from '@mui/icons-material/Chat';
 
 
 const StyledSpeedDial = styled(SpeedDial)(({ theme }) => ({
-    position: 'absolute',
-    '&.MuiSpeedDial-directionUp, &.MuiSpeedDial-directionLeft': {
-      bottom: theme.spacing(2),
-      right: theme.spacing(2),
-    },
-    '&.MuiSpeedDial-directionDown, &.MuiSpeedDial-directionRight': {
-      top: theme.spacing(2),
-      left: theme.spacing(2),
-    },
-  }));
+  position: 'absolute',
+  '&.MuiSpeedDial-directionUp, &.MuiSpeedDial-directionLeft': {
+    bottom: theme.spacing(2),
+    right: theme.spacing(2),
+  },
+  '&.MuiSpeedDial-directionDown, &.MuiSpeedDial-directionRight': {
+    top: theme.spacing(2),
+    left: theme.spacing(2),
+  },
+}));
 
 
-  const actions = [
-    { icon: <Link className={'link'} to='/'><HomeIcon /></Link>, name: 'Home' },
-    { icon: <Link className={'link'} to='/chat'><ChatIcon/></Link>, name: 'Chat' },
-    { icon: <Link className={'link'} to='/login'><LoginIcon/></Link>, name: 'Login' },
-    { icon: <Link className={'link'} to='/singUp'><AssignmentIcon/></Link>, name: 'SignUP' },
-  ];
+const actions = [
+  { icon: <Link className={'link'} to='/'><HomeIcon /></Link>, name: 'Home' },
+  { icon: <Link className={'link'} to='/chat'><ChatIcon /></Link>, name: 'Chat' },
+  { icon: <Link className={'link'} to='/login'><LoginIcon /></Link>, name: 'Login' },
+  { icon: <Link className={'link'} to='/singUp'><AssignmentIcon /></Link>, name: 'SignUP' },
+];
 
 const BallMenu = () => {
   return (
     <>
-        <StyledSpeedDial
-          ariaLabel="SpeedDial"
-          hidden={false}
-          icon={<SpeedDialIcon openIcon={<ClearIcon/>} icon={<DensityMediumIcon/>} />}
-          direction={'right'}
-        >
-          {actions.map((action) => (
-            <SpeedDialAction
-              key={action.name}
-              icon={action.icon}
-              tooltipTitle={action.name}
-            />
-          ))}
-        </StyledSpeedDial>
+      <StyledSpeedDial
+        ariaLabel="SpeedDial"
+        hidden={false}
+        icon={<SpeedDialIcon openIcon={<ClearIcon />} icon={<DensityMediumIcon />} />}
+        direction={'right'}
+      >
+        {actions.map((action) => (
+          <SpeedDialAction
+            key={action.name}
+            icon={action.icon}
+            tooltipTitle={action.name}
+          />
+        ))}
+      </StyledSpeedDial>
     </>
-)
+  )
 };
 
 export default BallMenu;

@@ -1,6 +1,3 @@
-import { BottomNavigation,BottomNavigationAction } from '@mui/material';
-import { Adb,Favorite } from '@mui/icons-material'
-
 const Footer = () => {
   return (<>
       <div className='miFooter'>

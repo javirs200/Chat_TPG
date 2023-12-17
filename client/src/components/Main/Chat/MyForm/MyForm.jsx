@@ -1,6 +1,6 @@
-import React, { useState,useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { socket } from '../../../../config/socket';
-import { TextField,Button } from "@mui/material";
+import { TextField, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { UserContext } from '../../../../context/userContext';
@@ -15,7 +15,7 @@ export function MyForm() {
   const navigateTo = useNavigate();
 
   const redirect = (route) => {
-      navigateTo(route);
+    navigateTo(route);
   }
 
   function onSubmit(event) {
@@ -33,10 +33,10 @@ export function MyForm() {
     setValue(e.target.value)
   }
 
-  const handleLogout = async()=>{
+  const handleLogout = async () => {
     try {
       const res = await axios.get('/users/logout')
-      console.log('logout res',res);
+      console.log('logout res', res);
       socket.disconnect()
       redirect('/')
     } catch (error) {
@@ -44,7 +44,7 @@ export function MyForm() {
     }
   }
 
-  const handleExit = async()=>{
+  const handleExit = async () => {
     try {
       socket.disconnect()
       redirect('/')
@@ -55,15 +55,15 @@ export function MyForm() {
 
   return (
     <div className='chatControlls'>
-    <form onSubmit={ onSubmit }>
-      <TextField id="standard-basic" label="Mensaje" variant="standard" onChange={handleChange} />
-      <Button variant="contained" disabled={isLoading} type="submit">Enviar</Button>
-    </form>
-    <br />
-    {logged? 
-    <Button variant="outlined" onClick={()=>handleLogout()}>Logout</Button> :
-    <Button variant="outlined" onClick={()=>handleExit()}>Exit</Button>
-    }
+      <form onSubmit={onSubmit}>
+        <TextField id="standard-basic" label="Mensaje" variant="standard" onChange={handleChange} />
+        <Button variant="contained" disabled={isLoading} type="submit">Enviar</Button>
+      </form>
+      <br />
+      {logged ?
+        <Button variant="outlined" onClick={() => handleLogout()}>Logout</Button> :
+        <Button variant="outlined" onClick={() => handleExit()}>Exit</Button>
+      }
     </div>
   );
 }

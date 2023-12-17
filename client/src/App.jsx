@@ -20,12 +20,12 @@ function App() {
   return (
     <div className="App">
       <ThemeProvider theme={darkTheme}>
-    <CssBaseline />
-      <BrowserRouter>
-        <Header />
-        <Main />
-        <Footer />
-      </BrowserRouter>
+        <CssBaseline />
+        <BrowserRouter>
+          <Header />
+          <Main />
+          <Footer />
+        </BrowserRouter>
       </ThemeProvider>
     </div>
   )

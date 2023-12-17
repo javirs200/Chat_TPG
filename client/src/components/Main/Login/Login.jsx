@@ -1,4 +1,4 @@
-import React,{useContext} from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 import { Button } from "@mui/material";
@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
 
-  const{ setLogged }= useContext(UserContext)
+  const { setLogged } = useContext(UserContext)
 
   const navigateTo = useNavigate();
 
@@ -23,7 +23,7 @@ const Login = () => {
     try {
 
       let user = { email: data.email, password: data.password }
-     
+
       const res = await axios.post('/users/login', user)
 
       //respuesta de api

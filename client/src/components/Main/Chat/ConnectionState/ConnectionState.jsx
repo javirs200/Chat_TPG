@@ -1,4 +1,4 @@
-import React,{useContext} from 'react';
+import React, { useContext } from 'react';
 import { ConectionContext } from '../../../../context/connectionContext';
 import { UserContext } from '../../../../context/userContext';
 import WifiIcon from '@mui/icons-material/Wifi';
@@ -14,7 +14,7 @@ export function ConnectionState() {
   const { logged } = useContext(UserContext);
 
   return (<>
-      {isConnected ? <WifiIcon fontSize="large"/> : <WifiOffIcon fontSize="large"/> }
-      {logged ? <PersonIcon fontSize="large"/> : <PersonOffIcon fontSize="large"/> }
+    {isConnected ? <WifiIcon fontSize="large" /> : <WifiOffIcon fontSize="large" />}
+    {logged ? <PersonIcon fontSize="large" /> : <PersonOffIcon fontSize="large" />}
   </>);
 }

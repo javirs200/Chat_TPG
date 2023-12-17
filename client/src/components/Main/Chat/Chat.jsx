@@ -14,8 +14,8 @@ export default function Chat() {
   const { setLogged } = useContext(UserContext)
 
   const { messages, setMessages } = useContext(MessagesContext)
-  
-  const [userName,setUserName] = useState('')
+
+  const [userName, setUserName] = useState('')
 
   useEffect(() => {
 
@@ -31,25 +31,25 @@ export default function Chat() {
       setLogged(false)
     }
 
-    function onSetUserNameEvent(value){
-      console.log("evento set username ",value);
-      if(value !== 'anonimo')
+    function onSetUserNameEvent(value) {
+      console.log("evento set username ", value);
+      if (value !== 'anonimo')
         setLogged(true)
       setUserName(value)
     }
 
     function onMessageEvent(value) {
 
-      console.log('mensajes estado ' ,messages );
+      console.log('mensajes estado ', messages);
 
-      console.log('llega por socket ',value);
+      console.log('llega por socket ', value);
 
       setMessages([...messages, value]);
     }
 
     function onSetAllMessagesEvent(value) {
 
-      console.log('mensajes recuperados ' , value);
+      console.log('mensajes recuperados ', value);
 
       setMessages(value);
 
@@ -76,6 +76,8 @@ export default function Chat() {
 
   return (
     <div className="Chat">
+      <img src="/logo192.png" alt="Chat TPG" />
+      <br />
       <ConnectionState />
       <MessageBox messages={messages} userName={userName} />
       <MyForm />

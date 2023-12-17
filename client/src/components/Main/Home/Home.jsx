@@ -8,14 +8,16 @@ const Home = () => {
   const navigateTo = useNavigate();
 
   const redirect = (route) => {
-      navigateTo(route);
+    navigateTo(route);
   }
 
   return (
     <div className="home">
-      <h1>Home</h1>
-      <Button variant="contained" onClick={()=>{redirect('/login')}} >Login</Button>
-      <Button variant="contained" onClick={()=>{redirect('/singUp')}} >SingUP</Button>
+      <h1>Chat TPG</h1>
+      <img src="/logo512.png" alt="Chat TPG" />
+      <Button variant="contained" onClick={() => { redirect('/login') }} >Login</Button>
+      <br />
+      <Button variant="contained" onClick={() => { redirect('/singUp') }} >SingUP</Button>
     </div>
   );
 };

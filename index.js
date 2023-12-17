@@ -45,36 +45,36 @@ io.on('connection', async (socket) => {
   let name = 'anonimo'
   let email = undefined
 
-  try{
+  try {
     const strToken = socket.handshake.headers.cookie
-    if(strToken){
+    if (strToken) {
       console.log('cookie exitente');
       const acces_tokent = strToken.split('access_token=')[1]
       const decodedToken = decodeToken(acces_tokent)
       name = decodedToken.name
       email = decodedToken.email
-      socket.emit('setUserNameEvent',name)
+      socket.emit('setUserNameEvent', name)
     }
-  }catch(error){
+  } catch (error) {
     console.log(error);
   }
 
-  console.log("nueva conexion usuario email -> ",email,' name->',name);
+  console.log("nueva conexion usuario email -> ", email, ' name->', name);
 
   let allMessages = await messageModel.getAll()
   console.log('recuperando todos los mensajes', allMessages);
-  socket.emit('setAllMessagesEvent' , allMessages)
-   
+  socket.emit('setAllMessagesEvent', allMessages)
+
   socket.on('clientMessage', async (value) => {
 
     console.log('client send data: ', value)
 
     //guardar mensaje en bdd
-    let res = await messageModel.save(email,value)
+    let res = await messageModel.save(email, value)
 
-    console.log('guadando mensaje en db respuesta',res);
+    console.log('guadando mensaje en db respuesta', res);
 
-    let eventObj = { name:name, message: value }
+    let eventObj = { name: name, message: value }
 
     io.emit('messageEvent', eventObj)
   });

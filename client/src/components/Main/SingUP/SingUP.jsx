@@ -1,15 +1,15 @@
-import React,{useContext} from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 import { Button } from "@mui/material";
 
-import {UserContext} from '../../../context/userContext'
+import { UserContext } from '../../../context/userContext'
 
 import { useNavigate } from "react-router-dom";
 
 const SingUP = () => {
 
-  const{ setLogged }= useContext(UserContext)
+  const { setLogged } = useContext(UserContext)
 
   const navigateTo = useNavigate();
 
