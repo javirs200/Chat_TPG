@@ -1,11 +1,25 @@
 const User = require('./usersSchema');
 
+// {
+//     "_id" : ObjectId("000000000000000000000000"),
+//     "name" : "anonimo",
+//     "password" : "0000",
+//     "email" : "anonimo@anonimo.com",
+//     "createdAt" : ISODate("2023-12-16T22:04:12.646+0000"),
+//     "updatedAt" : ISODate("2023-12-16T22:04:12.646+0000"),
+//     "__v" : NumberInt(0)
+// }
 
+
+//create
 const signup = async (name,email, password) => {
 
     try {
+
         const newUser = await User.create({ name,email,password });
+        
         return newUser;
+
 
     } catch (error) {
         console.log(error.message);
@@ -13,10 +27,11 @@ const signup = async (name,email, password) => {
     };
 };
 
-const login = async (email, password) => {
+//read
+const login = async (email,password) => {
     try {
-        const userExists = await User.find({ email, password });
-        console.log(userExists);
+        const userExists = await User.find({ email,password });
+        
         return userExists;
 
     } catch (error) {
@@ -25,22 +40,13 @@ const login = async (email, password) => {
     };
 };
 
-const getAllUsers = async () => {
-    try {
-        const users = await User.find({});
-        console.log("USERS", users);
-        return users
+//update -not needed now
 
-    } catch (error) {
-        console.log(error.message);
-        throw error;
-    }
-};
+//delete -not needed now
 
 const userModels = {
     signup,
-    login,
-    getAllUsers
+    login
 };
 
 
