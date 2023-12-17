@@ -4,15 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "buildRunServer": "cd client/ && npm run build && cd .. && nodemon index.js",
-    "buildClient": "cd client/ && npm run build",
     "start": "node server.js",
-    "server": "nodemon server.js",
-    "client": "npm start --prefix client",
-    "clientinstall": "npm install --prefix client",
+    "devServer": "nodemon server.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "deploy": "concurrently \"npm run server\" \"npm run client\"",
-    "render-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "deploy": "node server.js"
   },
   "keywords": [],
   "author": "",
