@@ -41,8 +41,30 @@ const login = async (email,password) => {
 };
 
 //update -not needed now
+const updateUser = async (email,newUser) => {
+    try {
+        const userExists = await User.replaceOne({ email },newUser);
+
+        return userExists
+
+    } catch (error) {
+        console.log(error.message);
+        throw error
+    };
+};
 
 //delete -not needed now
+const deleteUser = async (email,password) => {
+    try {
+        const userExists = await User.deleteOne({ email });
+        
+        return userExists;
+
+    } catch (error) {
+        console.log(error.message);
+        throw error
+    };
+};
 
 const userModels = {
     signup,
