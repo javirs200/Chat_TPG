@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import { socket } from '../../../../config/socket';
 import { TextField,Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import { UserContext } from '../../../../context/userContext';
 
 export function MyForm() {
 
   const [value, setValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  const { logged } = useContext(UserContext);
 
   const navigateTo = useNavigate();
 
@@ -41,6 +44,15 @@ export function MyForm() {
     }
   }
 
+  const handleExit = async()=>{
+    try {
+      socket.disconnect()
+      redirect('/')
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <div className='chatControlls'>
     <form onSubmit={ onSubmit }>
@@ -48,7 +60,10 @@ export function MyForm() {
       <Button variant="contained" disabled={isLoading} type="submit">Enviar</Button>
     </form>
     <br />
-    <Button variant="outlined" onClick={()=>handleLogout()}>Logout</Button>
+    {logged? 
+    <Button variant="outlined" onClick={()=>handleLogout()}>Logout</Button> :
+    <Button variant="outlined" onClick={()=>handleExit()}>Exit</Button>
+    }
     </div>
   );
 }

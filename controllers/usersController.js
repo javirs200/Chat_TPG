@@ -4,15 +4,21 @@ const { createToken,decodeToken } = require('../config/jsonWebToken');
 const signup = async (req, res) => {
     try {
         const { name,email, password } = req.body;
-        console.log(name,email,password);
-
+        
         const newUser = await usersModels.signup(name,email,password)
-        console.log(newUser)
+        
+        console.log('usuario creado');
 
         const token = createToken({name,email});
+
+        console.log('token creado');
+
         res.status(201)
         .cookie('access_token', token)
         .json({ msg: "Signed Up" });
+
+        console.log('token enviado');
+
 
     } catch (error) {
         res.status(400).json({ msg: error.message });
@@ -55,7 +61,6 @@ const logOut = async (req, res) => {
     }
 
 }
-
 
 
 const users = {

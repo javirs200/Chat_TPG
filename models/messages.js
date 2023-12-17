@@ -2,32 +2,47 @@ const Message = require('./messageSchema');
 const User = require('./usersSchema');
 
 //create
-const send = async (userEmail,text) => {
+const save = async (userEmail,text) => {
 
     try {
 
-        const user = await User.find({email:userEmail});
+        console.log('email de usuario',userEmail);
 
-        console.log('objeto user ->',user, 'id user ->',user._id);
+        const user = await User.findOne({email:userEmail});
 
-        // const newMessage = await Message.create({ userEmail,text });
-        return newMessage;
+        if(user){
+            const newMessage = await Message.create({ content:text,id_user:user.id });
+            return newMessage;
+        }else{
+            const newMessage = await Message.create({ content:text,id_user:'000000000000000000000000'}); //fake user
+            return newMessage;
+        }
 
     } catch (error) {
         console.log(error.message);
-        throw error
+        
     };
 };
 
 //read
 const getAll = async () => {
     try {
-        const allMessages = await Message.find({});
+
+        const res = await Message.find({});
+
+        let allMessages = []
+
+        for (const m of res) {
+
+            const user =  await User.findOne({_id:m.id_user});
+           
+            allMessages.push({name:user.name,message:m.content})
+        }
+    
         return allMessages;
 
     } catch (error) {
         console.log(error.message);
-        throw error
     };
 };
 
@@ -36,7 +51,7 @@ const getAll = async () => {
 //delete -not needed now
 
 const messageModels = {
-    send,
+    save,
     getAll
 };
 

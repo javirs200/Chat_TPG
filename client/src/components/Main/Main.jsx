@@ -7,10 +7,13 @@ import { socket } from "../../config/socket";
 import { Route, Routes } from "react-router-dom";
 import { ConectionContext } from "../../context/connectionContext";
 import { UserContext } from "../../context/userContext";
+import { MessagesContext } from "../../context/messagesContext";
 
 const Main = () => {
 
     const [logged, setLogged] = useState(false);
+
+    const [messages, setMessages] = useState([]);
 
     const [isConnected, setIsConnected] = useState(socket.connected);
 
@@ -44,11 +47,13 @@ const Main = () => {
                 />
                 <Route path="/chat"
                     element={
-                        <ConectionContext.Provider value={{ isConnected, updateConnection }}>
-                            <div>
-                                <Chat />
-                            </div>
-                        </ConectionContext.Provider>
+                        <MessagesContext.Provider value={{ messages, setMessages }}>
+                            <ConectionContext.Provider value={{ isConnected, updateConnection }}>
+                                <div>
+                                    <Chat />
+                                </div>
+                            </ConectionContext.Provider>
+                        </MessagesContext.Provider>
                     }
                 />
                 <Route path="/*"

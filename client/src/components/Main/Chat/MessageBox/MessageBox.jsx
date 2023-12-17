@@ -7,6 +7,7 @@ export function MessageBox({ messages, userName }) {
 
   const printMessages = () => {
     // let eventObj = {user:'',message:value}
+
     return messages.map((el, index) => {
 
       if (el.name === userName)

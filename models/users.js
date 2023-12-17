@@ -1,11 +1,25 @@
 const User = require('./usersSchema');
 
+// {
+//     "_id" : ObjectId("000000000000000000000000"),
+//     "name" : "anonimo",
+//     "password" : "0000",
+//     "email" : "anonimo@anonimo.com",
+//     "createdAt" : ISODate("2023-12-16T22:04:12.646+0000"),
+//     "updatedAt" : ISODate("2023-12-16T22:04:12.646+0000"),
+//     "__v" : NumberInt(0)
+// }
+
+
 //create
 const signup = async (name,email, password) => {
 
     try {
+
         const newUser = await User.create({ name,email,password });
+        
         return newUser;
+
 
     } catch (error) {
         console.log(error.message);
@@ -17,7 +31,7 @@ const signup = async (name,email, password) => {
 const login = async (email,password) => {
     try {
         const userExists = await User.find({ email,password });
-        // console.log(userExists);
+        
         return userExists;
 
     } catch (error) {

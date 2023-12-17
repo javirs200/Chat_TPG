@@ -14,7 +14,8 @@ const { decodeToken } = require('./config/jsonWebToken');
 
 const { Server } = require("socket.io");
 const usersRouter = require('./routes/users.routes');
-const messagesRouter = require('./routes/messages.routes');
+
+const messageModel = require('./models/messages');
 
 const io = new Server(server, {
   cors: {
@@ -28,7 +29,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/users', usersRouter)
-app.use('/messages', messagesRouter)
 
 //* Serve static assets in production, must be at this location of this file
 if (process.env.NODE_ENV === 'production') {
@@ -40,9 +40,10 @@ if (process.env.NODE_ENV === 'production') {
 
 // io.emit send to all clients , socket.emit send to particular client
 
-io.on('connection', (socket) => {
+io.on('connection', async (socket) => {
 
   let name = 'anonimo'
+  let email = undefined
 
   try{
     const strToken = socket.handshake.headers.cookie
@@ -51,24 +52,27 @@ io.on('connection', (socket) => {
       const acces_tokent = strToken.split('access_token=')[1]
       const decodedToken = decodeToken(acces_tokent)
       name = decodedToken.name
+      email = decodedToken.email
       socket.emit('setUserNameEvent',name)
     }
   }catch(error){
     console.log(error);
   }
 
-  console.log("nueva conexion usuario ",name);
-  
+  console.log("nueva conexion usuario email -> ",email,' name->',name);
 
-  // get user id from db for storage messages
-
-  socket.on('clientMessage', (value) => {
-
-    console.log('echo from server ');
+  let allMessages = await messageModel.getAll()
+  console.log('recuperando todos los mensajes', allMessages);
+  socket.emit('setAllMessagesEvent' , allMessages)
+   
+  socket.on('clientMessage', async (value) => {
 
     console.log('client send data: ', value)
 
     //guardar mensaje en bdd
+    let res = await messageModel.save(email,value)
+
+    console.log('guadando mensaje en db respuesta',res);
 
     let eventObj = { name:name, message: value }
 
