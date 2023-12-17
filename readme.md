@@ -12,7 +12,7 @@ Also this app uses:
 
 ### RUNNING THE APP 
 
-get npm dependencies
+Get npm dependencies
 ```
 npm install
 
@@ -24,14 +24,14 @@ cd ..
 
 ```
 
-Fill out .env\
+Crate and Fill out '.env' file on project root dir
 
 ```
 MONGO_URI=<mongo database uri>
 MY_TOKEN_SECRET=<some secret string>
 ```
 
-run development enviroment
+Run development enviroment
 ```
 npm run dev
 
