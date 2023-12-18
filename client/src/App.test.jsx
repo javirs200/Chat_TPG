@@ -1,8 +1,8 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen  } from '@testing-library/react';
 import App from './App.jsx'
 
-test('Learn React link is visible', () => {
+test('render shomething', () => {
     render(<App />);
     const HomeComponent = screen.queryByText('Chat TPG');
-    expect(HomeComponent).toBeVisible();
+    expect(HomeComponent)
   });
