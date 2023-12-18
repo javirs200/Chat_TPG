@@ -10,7 +10,7 @@
     "dev": "concurrently \"npm run devServer\" \"npm run client\"",
     "deploy": "node index.js",
     "clentTest": "npm test --prefix client",
-    "test": "cross-env NODE_ENV=test jest --testTimeout=5000"
+    "test": "cross-env NODE_ENV=test jest --testPathIgnorePatterns=/client --testTimeout=5000"
   },
   "keywords": [],
   "author": "",
