@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { socket } from '../../../config/socket';
+import socket from '../../../config/socket';
 import ConnectionState from './ConnectionState/ConnectionState';
 import MessageBox from "./MessageBox/MessageBox";
 import MyForm from './MyForm/MyForm';

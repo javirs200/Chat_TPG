@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { socket } from '../../../../config/socket';
+import socket from '../../../../config/socket';
 import { TextField, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
