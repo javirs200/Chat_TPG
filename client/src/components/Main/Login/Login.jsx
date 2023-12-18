@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import axios from 'axios';
 import { Button } from "@mui/material";
 
 import { UserContext } from '../../../context/userContext'
@@ -24,7 +23,9 @@ const Login = () => {
 
       let user = { email: data.email, password: data.password }
 
-      const res = await axios.post('/users/login', user)
+      const response = await fetch('/users/login', {method:'post',body:user})
+
+      const res = response.json()
 
       //respuesta de api
       if (res) {

@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react';
 import socket from '../../../../config/socket';
 import { TextField, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
 import { UserContext } from '../../../../context/userContext';
 
 const Myform = ()=> {
@@ -35,8 +34,8 @@ const Myform = ()=> {
 
   const handleLogout = async () => {
     try {
-      const res = await axios.get('/users/logout')
-      console.log('logout res', res);
+      const res = await fetch('/users/logout')
+      console.log('logout res', res.json());
       socket.disconnect()
       redirect('/')
     } catch (error) {

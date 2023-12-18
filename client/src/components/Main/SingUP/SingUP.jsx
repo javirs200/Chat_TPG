@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import axios from 'axios';
 import { Button } from "@mui/material";
 
 import { UserContext } from '../../../context/userContext'
@@ -24,12 +23,12 @@ const SingUP = () => {
     try {
 
       let user = { name: data.name, email: data.email, password: data.password }
-      console.log('datos de formulario ', user);
 
       //api hazme un user
-      const res = await axios.post('/users/signup', user)
+      const response = await fetch('/users/singup', {method:'post',body:user})
 
-      console.log('axios data res', res);
+      const res = response.json()
+
       //respuesta de api
       if (res) {
         if (res.status === 201) {
