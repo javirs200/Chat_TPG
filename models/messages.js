@@ -36,7 +36,7 @@ const getAll = async () => {
 
             const user =  await User.findOne({_id:m.id_user});
            
-            allMessages.push({name:user.name,message:m.content})
+            allMessages.push({name:user.name,message:m.content,timestamp:m.createdAt})
         }
     
         return allMessages;
