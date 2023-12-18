@@ -6,45 +6,52 @@ const signup = async (req, res) => {
         const { name, email, password } = req.body;
 
         const newUser = await usersModels.signup(name, email, password)
-
-        console.log('usuario creado');
-
+        
         const token = createToken({ name, email });
-
-        console.log('token creado');
 
         res.status(201)
             .cookie('access_token', token)
             .json({ msg: "Signed Up" });
-
-        console.log('token enviado');
-
-
     } catch (error) {
+        if(error.code === 11000)
+        res.status(400).json({ msg: 'duplicated user' });
+        else
         res.status(400).json({ msg: error.message });
     }
 };
 
 const login = async (req, res) => {
     try {
-        console.log("peticion de login ");
-        const { email, password } = req.body;
-        // console.log(email,password);
+        //pericion de login
 
+        // leemos datos
+        const { email, password } = req.body;
+
+        //comprobamos existencia en DB conicidente con email y pasword
         const logedUser = await usersModels.login(email, password)
 
-        const name = logedUser[0].name
-        console.log("logedUser name ", name)
+        console.log('respuesta de mongo ->',logedUser );
 
-        const token = createToken({ name, email });
-
-        //console.log('decoded token',decodeToken(token));
-        console.log('envio token en cookie');
-        res.status(200)
-            .cookie('access_token', token)
-            .json({ msg: "logged in" });
+       if(logedUser.length > 0){
+         //recuperamos  nombre de usuario
+         const name = logedUser[0].name
+        
+         // generamos en tokken jwt
+         const token = createToken({ name, email });
+ 
+         // enviamos token en cookie y ok login exitoso
+         res.status(200)
+             .cookie('access_token', token)
+             .json({ msg: "logged in" });
+       }else{
+        res.status(404)
+        .json({ msg: "wrong credentials" });
+       }
 
     } catch (error) {
+
+        console.log('login error ->',error);
+
         res.status(400).json({ msg: error.message });
     }
 };

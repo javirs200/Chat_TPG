@@ -21,19 +21,24 @@ const Login = () => {
   const onSubmit = async (data) => {
     try {
 
+      //datos del form login
       let user = { email: data.email, password: data.password }
 
-      const response = await fetch('/users/login', {method:'post',body:user})
+      //peticion api para login con objeto usuario
+      const response = await fetch('/users/login',  {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(user)
+      })
 
-      const res = response.json()
-
-      //respuesta de api
-      if (res) {
-        if (res.status === 200) {
+      //si respuesta comprobamos si fue exitoso
+      if (response) {
+        //si ok login correcto
+        if (response.status === 200) {
           setLogged(true)
           navigateTo('/chat')
-        } else {
-          alert('wrong login')
+        } else if (response.status === 404) {
+          alert('datos de acceso incorrectos , intentelo de nuevo')
         }
       }
     } catch (error) {
@@ -53,7 +58,7 @@ const Login = () => {
           {errors.pasword && <span>This field is required</span>}
         </fieldset>
         <br />
-        <Button variant="contained" input type="submit">Login</Button>
+        <Button variant="contained" type="submit">Login</Button>
       </form>
     </div>
   );

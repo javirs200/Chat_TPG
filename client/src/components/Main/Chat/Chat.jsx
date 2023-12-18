@@ -7,7 +7,7 @@ import { ConectionContext } from '../../../context/connectionContext';
 import { MessagesContext } from '../../../context/messagesContext';
 import { UserContext } from '../../../context/userContext';
 
-const Chat = ()=> {
+const Chat = () => {
 
   const { updateConnection } = useContext(ConectionContext)
 
@@ -20,39 +20,27 @@ const Chat = ()=> {
   useEffect(() => {
 
     function onConnect() {
-      console.log('usuario conectado');
       updateConnection(true);
     }
 
     function onDisconnect() {
-      console.log('usuario desconectado');
       updateConnection(false);
       setUserName('')
       setLogged(false)
     }
 
     function onSetUserNameEvent(value) {
-      console.log("evento set username ", value);
       if (value !== 'anonimo')
         setLogged(true)
       setUserName(value)
     }
 
     function onMessageEvent(value) {
-
-      console.log('mensajes estado ', messages);
-
-      console.log('llega por socket ', value);
-
       setMessages([...messages, value]);
     }
 
     function onSetAllMessagesEvent(value) {
-
-      console.log('mensajes recuperados ', value);
-
       setMessages(value);
-
     }
 
     socket.on('connect', onConnect);
@@ -71,7 +59,14 @@ const Chat = ()=> {
     };
   });
 
-  useEffect(() => { socket.connect() }, [])
+  useEffect(() => {
+    //codigo para cuando monta el compomente
+    socket.connect()
+    return () => {
+      //codigo para cuando desmonta el compomente
+      socket.disconnect()
+    }
+  }, [])
 
 
   return (
@@ -79,7 +74,7 @@ const Chat = ()=> {
       <img src="/logo192.png" alt="Chat TPG" />
       <br />
       <ConnectionState />
-      <MessageBox messages={messages} userName={userName} />
+      <MessageBox messages={messages} userName={userName} date={new Date()} />
       <MyForm />
     </div>
   );

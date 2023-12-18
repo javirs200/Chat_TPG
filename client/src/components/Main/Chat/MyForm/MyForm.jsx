@@ -20,10 +20,10 @@ const Myform = ()=> {
   function onSubmit(event) {
     event.preventDefault();
     setIsLoading(true);
+    // evita el spameo del boton
     socket.timeout(2000).emit('clientMessage', value, () => {
       setIsLoading(false);
     });
-
     event.target['standard-basic'].value = ''
     setValue('')
   }
@@ -34,8 +34,7 @@ const Myform = ()=> {
 
   const handleLogout = async () => {
     try {
-      const res = await fetch('/users/logout')
-      console.log('logout res', res.json());
+      await fetch('/users/logout')
       socket.disconnect()
       redirect('/')
     } catch (error) {

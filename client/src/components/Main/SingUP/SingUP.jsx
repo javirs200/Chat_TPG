@@ -15,7 +15,6 @@ const SingUP = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors }
   } = useForm()
 
@@ -24,23 +23,27 @@ const SingUP = () => {
 
       let user = { name: data.name, email: data.email, password: data.password }
 
-      //api hazme un user
-      const response = await fetch('/users/singup', {method:'post',body:user})
+      //peticon api para registro
+      const response = await fetch('/users/signup', {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(user)
+      })
 
-      const res = response.json()
-
-      //respuesta de api
-      if (res) {
-        if (res.status === 201) {
-
-          // usar context logged
+      //si respuesta comprobamos si fue exitoso
+      if (response) {
+        // si creado entonces hacemos login automatico
+        if (response.status === 201) {
           setLogged(true)
-          console.log('response data', res.data);
-
           navigateTo('/chat')
+        } else if (response.status === 400) {
+          const res = await response.json()
+          if (res.msg.includes('duplicated')) {
+            alert('credenciales no validas , usuario ya registrado')
+          }else{
+            alert('no se pudo registrar')
+          }
         } else {
-          //use state error
-          // mostrar componente no se pudo registrar ?
           alert('no se pudo registrar')
         }
       }
@@ -63,7 +66,7 @@ const SingUP = () => {
           {errors.pasword && <span>This field is required</span>}
         </fieldset>
         <br />
-        <Button variant="contained" input type="submit">SingUp</Button>
+        <Button variant="contained" type="submit">SingUp</Button>
       </form>
     </div>
   );
