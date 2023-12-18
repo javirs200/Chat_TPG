@@ -9,7 +9,6 @@ const cors = require('cors');
 const http = require('http');
 const server = http.createServer(app);
 
-const SECRET = process.env.MY_TOKEN_SECRET
 const { decodeToken } = require('./config/jsonWebToken');
 
 const { Server } = require("socket.io");
