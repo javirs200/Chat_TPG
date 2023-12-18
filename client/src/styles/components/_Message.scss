@@ -3,23 +3,29 @@
 
 .Messaje0 , .Messaje1,.Messaje2{
     display: flex;
-    align-content: center;
-    justify-content: center;
+    flex-direction: column;
     width: 50%;
     border-radius: 30px;
-    
     margin: 5%;
+    padding: 5%;
+    flex-wrap: wrap;
+}
+
+.content{
+    margin-bottom: 2%;
 }
 
 .nick{
-    color: $gray;
-    float: right;
-    margin-right: 5%;
+    color: $nickColor;
 }
 
 .texto{
    font-size: large;
    margin: 0;
+}
+
+.timestamp{
+    color: $timestampColor;
 }
 
 .Messaje0{
