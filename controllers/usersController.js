@@ -23,14 +23,15 @@ const signup = async (req, res) => {
 const login = async (req, res) => {
     try {
         //pericion de login
+        // console.log('datos llegada test ->' ,req);
 
         // leemos datos
         const { email, password } = req.body;
-
+        
         //comprobamos existencia en DB conicidente con email y pasword
         const logedUser = await usersModels.login(email, password)
 
-        console.log('respuesta de mongo ->',logedUser );
+        // console.log('respuesta de mongo ->',logedUser );
 
        if(logedUser.length > 0){
          //recuperamos  nombre de usuario
