@@ -8,7 +8,8 @@
     "client": "npm start --prefix client",
     "devServer": "nodemon index.js",
     "dev": "concurrently \"npm run devServer\" \"npm run client\"",
-    "deploy": "node index.js"
+    "deploy": "node index.js",
+    "test": "npm test --prefix client"
   },
   "keywords": [],
   "author": "",
