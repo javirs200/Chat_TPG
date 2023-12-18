@@ -17,11 +17,11 @@ const usersRouter = require('./routes/users.routes');
 
 const messageModel = require('./models/messages');
 
-const io = new Server(server, {
-  cors: {
-    origin: "http://localhost:3000" // permito el cliente de develop
-  }
-});
+const socketConfig = require('./config/socketio')
+
+//console.log('itizialize socket io with options ->' , socketConfig);
+
+const io = new Server(server, socketConfig);
 
 app.use(cors())
 
