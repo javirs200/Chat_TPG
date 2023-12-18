@@ -8,7 +8,9 @@
     "client": "npm start --prefix client",
     "devServer": "nodemon index.js",
     "dev": "concurrently \"npm run devServer\" \"npm run client\"",
-    "deploy": "node index.js"
+    "deploy": "node index.js",
+    "clentTest": "npm test --prefix client",
+    "test": "cross-env NODE_ENV=test jest --testPathIgnorePatterns=/client --testTimeout=5000"
   },
   "keywords": [],
   "author": "",

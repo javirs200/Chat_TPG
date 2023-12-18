@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react';
 import socket from '../../../../config/socket';
 import { TextField, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
 import { UserContext } from '../../../../context/userContext';
 
 const Myform = ()=> {
@@ -21,10 +20,10 @@ const Myform = ()=> {
   function onSubmit(event) {
     event.preventDefault();
     setIsLoading(true);
+    // evita el spameo del boton
     socket.timeout(2000).emit('clientMessage', value, () => {
       setIsLoading(false);
     });
-
     event.target['standard-basic'].value = ''
     setValue('')
   }
@@ -35,8 +34,7 @@ const Myform = ()=> {
 
   const handleLogout = async () => {
     try {
-      const res = await axios.get('/users/logout')
-      console.log('logout res', res);
+      await fetch('/users/logout')
       socket.disconnect()
       redirect('/')
     } catch (error) {
