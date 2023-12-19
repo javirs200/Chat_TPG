@@ -48,8 +48,8 @@ there is an exapmle of render deployment -> [Chat TPG](https://chat-tpg.onrender
 
 ### PANTALLA INICIAL
 
-![Alt text](assets/image.png)
+![Alt text](assets/home.png)
 
 ### PANTALLA CHAT
 
-![Alt text](assets/image-1.png)
+![Alt text](assets/chat.png)
