@@ -47,7 +47,6 @@ io.on('connection', async (socket) => {
     // comprobacion del token en las cokies para ver si esta logado y servirle el nomre de usuario
     const strToken = socket.handshake.headers.cookie
     if (strToken) {
-      console.log('cookie exitente');
       const acces_tokent = strToken.split('access_token=')[1]
       const decodedToken = decodeToken(acces_tokent)
       name = decodedToken.name

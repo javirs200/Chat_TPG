@@ -6,8 +6,6 @@ const save = async (userEmail,text) => {
 
     try {
 
-        console.log('email de usuario',userEmail);
-
         const user = await User.findOne({email:userEmail});
 
         if(user){
