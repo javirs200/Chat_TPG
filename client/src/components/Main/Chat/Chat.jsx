@@ -22,14 +22,15 @@ const Chat = () => {
     function onConnect() {
       updateConnection(true);
 
-      const transport = socket.io.engine.transport.name; // in most cases, "polling"
+      // // debug protocol logs
+      // const transport = socket.io.engine.transport.name; // in most cases, "polling"
     
-      console.log('transport client',transport)
+      // console.log('transport client',transport)
     
-      socket.io.engine.on("upgrade", () => {
-        const upgradedTransport = socket.io.engine.transport.name; // in most cases, "websocket"
-        console.log(' upgraded transport ',upgradedTransport);
-      });
+      // socket.io.engine.on("upgrade", () => {
+      //   const upgradedTransport = socket.io.engine.transport.name; // in most cases, "websocket"
+      //   console.log(' upgraded transport ',upgradedTransport);
+      // });
       
     }
 
