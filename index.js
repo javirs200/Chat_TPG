@@ -1,25 +1,20 @@
-require('dotenv').config();
-const express = require('express');
-const app = express();
-const port = process.env.PORT || 5000;
+const { Server } = require("socket.io");
 const path = require('path');
+
 require('./config/mongoConnection');
-const cors = require('cors');
-
-const http = require('http');
-const server = http.createServer(app);
-
+const socketConfig = require('./config/socketio')
 const { decodeToken } = require('./config/jsonWebToken');
 
-const { Server } = require("socket.io");
 const usersRouter = require('./routes/users.routes');
-
 const messageModel = require('./models/messages');
 
-const socketConfig = require('./config/socketio')
+const express = require('express');
+const app = express();
+const http = require('http');
+const cors = require('cors');
 
-//inicializacion de socket io
-const io = new Server(server, socketConfig);
+require('dotenv').config();
+const port = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
@@ -28,17 +23,22 @@ app.use(express.urlencoded({ extended: true }));
 //rutas de api para login
 app.use('/users', usersRouter)
 
-//* Serve static assets in production, must be at this location of this file
-if (process.env.NODE_ENV === 'production') {
-  //*Set static folder
-  app.use(express.static('client/build'));
+const server = http.createServer(app);
 
-  app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html')));
-}
-
+//inicializacion de socket io
+const io = new Server(server, socketConfig);
 
 // io.emit send to all clients , socket.emit send to particular client
 io.on('connection', async (socket) => {
+
+  const transport = socket.conn.transport.name; // in most cases, "polling"
+
+  console.log('transport server',transport)
+
+  socket.conn.on("upgrade", () => {
+    const upgradedTransport = socket.conn.transport.name; // in most cases, "websocket"
+    console.log(' upgraded transport server ',upgradedTransport);
+  });
 
   let name = 'anonimo' // nombre generico por defecto  para enviar al fronnt
   let email = undefined // parametro para el controller si es undefined guarda como usuario generico
@@ -81,6 +81,18 @@ io.on('connection', async (socket) => {
   });
 
 });
+
+//* Serve static assets in production, must be at this location of this file
+if (process.env.NODE_ENV === 'production') {
+  //*Set static folder
+  app.use(express.static('client/build'));
+
+  app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html')));
+}else{
+
+  app.get('/*', (req, res)=>{res.status(404).send('not found')})
+
+}
 
 server.listen(port, () => {
   console.log(`listening on port:${port}`);
