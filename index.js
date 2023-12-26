@@ -31,14 +31,15 @@ const io = new Server(server, socketConfig);
 // io.emit send to all clients , socket.emit send to particular client
 io.on('connection', async (socket) => {
 
-  const transport = socket.conn.transport.name; // in most cases, "polling"
+  // // debug protocol logs
+  // const transport = socket.conn.transport.name; // in most cases, "polling"
 
-  console.log('transport server',transport)
+  // console.log('transport server',transport)
 
-  socket.conn.on("upgrade", () => {
-    const upgradedTransport = socket.conn.transport.name; // in most cases, "websocket"
-    console.log(' upgraded transport server ',upgradedTransport);
-  });
+  // socket.conn.on("upgrade", () => {
+  //   const upgradedTransport = socket.conn.transport.name; // in most cases, "websocket"
+  //   console.log(' upgraded transport server ',upgradedTransport);
+  // });
 
   let name = 'anonimo' // nombre generico por defecto  para enviar al fronnt
   let email = undefined // parametro para el controller si es undefined guarda como usuario generico
