@@ -6,7 +6,7 @@ const socketConfig = require('./config/socketio')
 const { decodeToken } = require('./config/jsonWebToken');
 
 const usersRouter = require('./routes/users.routes');
-const messageModel = require('./models/messages');
+const roomsRouter = require('./routes/room.routes');
 
 const express = require('express');
 const app = express();
@@ -20,8 +20,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-//rutas de api para login
+//rutas de api
 app.use('/users', usersRouter)
+app.use('/rooms', roomsRouter)
 
 const server = http.createServer(app);
 
