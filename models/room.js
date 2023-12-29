@@ -41,9 +41,8 @@ const getMessagesByRoomName = async (name) => {
 const addMessageByRoomName = async (name,messageId) => {
     try {
         const matchRoom = await Room.findOne({name:name});
-        matchRoom.messages.push(messageId);
+        matchRoom.messages.push({messageId});
         matchRoom.save();
-
     } catch (error) {
         console.log(error.message);
         throw error
