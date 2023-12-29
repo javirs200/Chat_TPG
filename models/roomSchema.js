@@ -4,9 +4,10 @@ const RoomSchema = new mongoose.Schema({
 
     name: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
-    messajes: [
+    messages: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Message'
