@@ -3,6 +3,7 @@ import Chat from "./Chat/Chat";
 import Home from './Home/Home';
 import Login from "./Login/Login";
 import SingUP from "./SingUP/SingUP";
+import RoomList from "./RoomList/RoomList";
 import socket from "../../config/socket";
 import { Route, Routes } from "react-router-dom";
 import { ConectionContext } from "../../context/connectionContext";
@@ -42,6 +43,13 @@ const Main = () => {
                     element={
                         <>
                             <Login />
+                        </>
+                    }
+                />
+                <Route path="/chatrooms"
+                    element={
+                        <>
+                            <RoomList />
                         </>
                     }
                 />
