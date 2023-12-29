@@ -30,6 +30,7 @@ const actions = [
   { icon: <Link className={'link'} to='/chat'><ChatIcon /></Link>, name: 'Chat' },
   { icon: <Link className={'link'} to='/login'><LoginIcon /></Link>, name: 'Login' },
   { icon: <Link className={'link'} to='/singUp'><AssignmentIcon /></Link>, name: 'SignUP' },
+  { icon: <Link className={'link'} to='/chatrooms'><ChatIcon /></Link>, name: 'ChatRooms' },
 ];
 
 const BallMenu = () => {
