@@ -1,0 +1,22 @@
+@import '../utils/variables.scss';
+@import '../utils/mixins.scss';
+
+.Room {
+    width: 60%;
+    margin: 5%;
+    border-radius: 10px;
+    border: solid 5px $green;
+    filter: grayscale(1);
+    background: $defaultBkgrnd;
+    background: $lienarGradient;
+}
+
+.Room:hover{
+    filter: grayscale(0);
+    -webkit-box-shadow: 10px 10px 17px -3px rgba(201, 201, 201, 1);
+    -moz-box-shadow: 10px 10px 17px -3px rgba(201, 201, 201, 1);
+    box-shadow: 10px 10px 17px -3px rgba(201, 201, 201, 1);
+
+    text-shadow: $textShadowColor 1px 0 10px;
+}
+

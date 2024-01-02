@@ -1,0 +1,11 @@
+@import '../utils/variables.scss';
+@import '../utils/mixins.scss';
+
+.RoomList{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+}
