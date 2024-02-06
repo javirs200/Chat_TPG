@@ -25,50 +25,19 @@ const Main = () => {
     return <main className="main">
         <UserContext.Provider value={{ logged, setLogged }}>
             <Routes>
-                <Route path="/"
-                    element={
-                        <>
-                            <Home />
-                        </>
-                    }
-                />
-                <Route path="/singUp"
-                    element={
-                        <>
-                            <SingUP />
-                        </>
-                    }
-                />
-                <Route path="/login"
-                    element={
-                        <>
-                            <Login />
-                        </>
-                    }
-                />
-                <Route path="/chatrooms"
-                    element={
-                        <>
-                            <RoomList />
-                        </>
-                    }
-                />
-                <Route path="/chat"
-                    element={
-                        <MessagesContext.Provider value={{ messages, setMessages }}>
-                            <ConectionContext.Provider value={{ isConnected, updateConnection }}>
-                                <div>
-                                    <Chat />
-                                </div>
-                            </ConectionContext.Provider>
-                        </MessagesContext.Provider>
-                    }
-                />
-                <Route path="/*"
-                    element={
-                        <><h1>Not found front</h1></>
-                    }
-                />
+                <Route path="/" element={<Home />} />
+                <Route path="/singUp" element={<SingUP />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/chatrooms" element={<RoomList />} />
+                <Route path="/chat" element={
+                    <MessagesContext.Provider value={{ messages, setMessages }}>
+                        <ConectionContext.Provider value={{ isConnected, updateConnection }}>
+                            <div>
+                                <Chat />
+                            </div>
+                        </ConectionContext.Provider>
+                    </MessagesContext.Provider>} />
+                <Route path="/*" element={<><h1>Not found front</h1></>} />
             </Routes>
         </UserContext.Provider>
     </main>;
