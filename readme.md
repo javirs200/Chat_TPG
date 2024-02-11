@@ -46,10 +46,10 @@ this app has a dockerfile , it can be deploy on plattforms shuch as render , aws
 
 there is an exapmle of render deployment -> [Chat TPG](https://chat-tpg.onrender.com)
 
-### PANTALLA INICIAL
+### LANDING SCREEN
 
-![Alt text](assets/home.png)
+![home Screen](assets/home.png)
 
-### PANTALLA CHAT
+### CHAT ROOM
 
-![Alt text](assets/chat.png)
+![Chat Screen](assets/chat.png)
